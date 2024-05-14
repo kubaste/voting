@@ -24,6 +24,19 @@ services:
       - front-tier
       - back-tier
 
+jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins_c
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_data:/var/jenkins_home
+    environment:
+      - JENKINS_OPTS=--prefix=/jenkins
+
+volumes:
+  jenkins_data:
   result:
     build: ./result
     # use nodemon rather than node for local dev
